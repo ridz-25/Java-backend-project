@@ -14,7 +14,7 @@ public abstract class User {
 
     //constructor
 
-    User(int userId,String name,String email,String password,
+    public User(int userId,String name,String email,String password,
         UserRole role,String phone,Timestamp createdAt,boolean active){
             this.userId=userId;
             this.name=name;

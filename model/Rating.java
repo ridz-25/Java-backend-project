@@ -6,7 +6,7 @@ public class Rating {
     private double averageRating;
     private int totalReviews;
 
-    Rating(int ratingId,int gigId,
+    public Rating(int ratingId,int gigId,
         double averageRating,int totalReviews){
             this.ratingId=ratingId;
             this.gigId=gigId;

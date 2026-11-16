@@ -9,11 +9,11 @@ public class Seller extends User{
     private String experience;
     private boolean isVerified;
 
-    Seller(int userId,String name,String email,
+    public Seller(int userId,String name,String email,
         String password,String phone,Timestamp createdAt,
         boolean active,String bio,String skills,String experience,boolean isVerified){
             
-            super(userId, name, email, password, UserRole.TWO, phone, createdAt, active);
+            super(userId, name, email, password, UserRole.SELLER, phone, createdAt, active);
             
             this.bio=bio;
             this.skills=skills;

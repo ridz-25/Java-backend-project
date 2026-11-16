@@ -10,7 +10,7 @@ public class Buyer extends User {
         String phone,Timestamp createdAt,boolean active,String address){
 
             super(userId, name, email, password,
-                UserRole.ONE, phone, createdAt, active);
+                UserRole.BUYER, phone, createdAt, active);
             
             this.address=address;
         }
@@ -36,6 +36,7 @@ public class Buyer extends User {
     }
     public boolean addReview(int orderId,int rating,String comment){
         //review functionality will be added later
+        return false;
     }
 
     @Override 

@@ -1,6 +1,6 @@
 package model;
 
-enum GigStatus {
+public enum GigStatus {
     ACTIVE,
     INACTIVE,
     DELETED;

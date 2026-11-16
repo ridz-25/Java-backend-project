@@ -11,7 +11,7 @@ public class Review {
     private String comment;
     private Timestamp createdAt;
 
-    Review(int reviewId,int orderId,int gigId,
+    public Review(int reviewId,int orderId,int gigId,
         int reviewerId,int rating,String comment,
         Timestamp createdAt){
             this.reviewId=reviewId;

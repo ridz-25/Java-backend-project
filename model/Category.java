@@ -7,7 +7,7 @@ public class Category {
     private String name;
     private String description;
 
-    Category(int categoryId,String name,String description){
+    public Category(int categoryId,String name,String description){
         this.categoryId=categoryId;
         this.name=name;
         this.description=description;

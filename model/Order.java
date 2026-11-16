@@ -13,7 +13,7 @@ public class Order {
     private Timestamp deliveryDate;
     private String notes;
 
-    Order(int orderId,int buyerId,int gigId,int sellerId,
+    public Order(int orderId,int buyerId,int gigId,int sellerId,
         double amount,OrderStatus status,Timestamp orderDate,
         Timestamp deliveryDate,String notes){
             this.orderId=orderId;

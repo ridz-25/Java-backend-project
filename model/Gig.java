@@ -17,7 +17,7 @@ public class Gig {
     private double avgRating;
     private int reviewCount;
 
-    Gig(int gigId,String title,String description,
+    public Gig(int gigId,String title,String description,
         int sellerId,int categoryId,double price,
         String deliveryTime,GigStatus status,Timestamp createdAt,
         Timestamp updatedAt,double avgRating,int reviewCount){
