@@ -1,3 +1,4 @@
+
 package util;
 
 import java.sql.Connection;
@@ -13,6 +14,11 @@ public class DBConnection {
 
     private static final String PASSWORD = "your_password";
 
+    // Private constructor prevents object creation
+    private DBConnection() {
+    }
+
+    // Establish database connection
     public static Connection getConnection()
             throws SQLException {
 
@@ -21,5 +27,22 @@ public class DBConnection {
             USERNAME,
             PASSWORD
         );
+    }
+
+    // Test database connection
+    public static boolean testConnection() {
+
+        try (Connection con = getConnection()) {
+
+            return con != null && !con.isClosed();
+
+        } catch (SQLException e) {
+
+            System.out.println(
+                "Database connection failed: " + e.getMessage()
+            );
+
+            return false;
+        }
     }
 }
