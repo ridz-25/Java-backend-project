@@ -115,4 +115,8 @@ public class Gig {
     public boolean isAvailable(){
         return status==GigStatus.ACTIVE;
     }
+    public void updateRating(double avgRating, int reviewCount) {
+        this.avgRating = avgRating;
+        this.reviewCount = reviewCount;
+    }
 }
