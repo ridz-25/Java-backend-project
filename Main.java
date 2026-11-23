@@ -1,5 +1,5 @@
 
-import console.MainMenu;
+import src.console.MainMenu;
 
 public class Main {
 
