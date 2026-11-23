@@ -5,19 +5,31 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import src.model.User;
 import src.model.Buyer;
 import src.model.Seller;
-import src.model.User;
-import src.util.PasswordUtil;
 import src.util.ValidationUtil;
+import src.util.PasswordUtil;
 
 public class UserService {
 
     // Temporary in-memory storage
     private ArrayList<User> users = new ArrayList<>();
 
-    // Auto-generated user ID
+    // Automatically generate user IDs
     private int nextUserId = 1;
+
+    // Check whether email already exists
+    private boolean isEmailRegistered(String email) {
+
+        for (User user : users) {
+            if (user.getEmail().equalsIgnoreCase(email.trim())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 
     // Register Buyer
     public Buyer registerBuyer(
@@ -27,18 +39,23 @@ public class UserService {
             String phone,
             String address) {
 
-        validateCommonDetails(name, email, password, phone);
-
-        if (ValidationUtil.isEmpty(address)) {
+        if (ValidationUtil.isEmpty(name) ||
+            ValidationUtil.isEmpty(address)) {
             throw new IllegalArgumentException(
-                "Address cannot be empty."
+                "Name and address cannot be empty."
             );
         }
 
-        checkDuplicateEmail(email);
+        validateCommonDetails(email, password, phone);
+
+        if (isEmailRegistered(email)) {
+            throw new IllegalArgumentException(
+                "Email is already registered."
+            );
+        }
 
         String hashedPassword =
-                PasswordUtil.hashPassword(password);
+            PasswordUtil.hashPassword(password);
 
         Buyer buyer = new Buyer(
             nextUserId++,
@@ -66,12 +83,22 @@ public class UserService {
             String skills,
             String experience) {
 
-        validateCommonDetails(name, email, password, phone);
+        if (ValidationUtil.isEmpty(name)) {
+            throw new IllegalArgumentException(
+                "Name cannot be empty."
+            );
+        }
 
-        checkDuplicateEmail(email);
+        validateCommonDetails(email, password, phone);
+
+        if (isEmailRegistered(email)) {
+            throw new IllegalArgumentException(
+                "Email is already registered."
+            );
+        }
 
         String hashedPassword =
-                PasswordUtil.hashPassword(password);
+            PasswordUtil.hashPassword(password);
 
         Seller seller = new Seller(
             nextUserId++,
@@ -94,16 +121,9 @@ public class UserService {
 
     // Common validation
     private void validateCommonDetails(
-            String name,
             String email,
             String password,
             String phone) {
-
-        if (ValidationUtil.isEmpty(name)) {
-            throw new IllegalArgumentException(
-                "Name cannot be empty."
-            );
-        }
 
         if (!ValidationUtil.isValidEmail(email)) {
             throw new IllegalArgumentException(
@@ -125,33 +145,20 @@ public class UserService {
         }
     }
 
-    // Check duplicate email
-    private void checkDuplicateEmail(String email) {
-
-        for (User user : users) {
-
-            if (user.getEmail().equalsIgnoreCase(email.trim())) {
-                throw new IllegalArgumentException(
-                    "Email is already registered."
-                );
-            }
-        }
-    }
-
     // Login
     public User login(String email, String password) {
 
-        if (ValidationUtil.isEmpty(email)
-                || ValidationUtil.isEmpty(password)) {
+        if (ValidationUtil.isEmpty(email) ||
+            ValidationUtil.isEmpty(password)) {
             return null;
         }
 
         for (User user : users) {
 
             if (user.getEmail().equalsIgnoreCase(email.trim())
-                    && user.isActive()
-                    && PasswordUtil.verifyPassword(
-                        password, user.getPassword())) {
+                && user.isActive()
+                && PasswordUtil.verifyPassword(
+                    password, user.getPassword())) {
 
                 return user;
             }
@@ -178,7 +185,7 @@ public class UserService {
         return new ArrayList<>(users);
     }
 
-    // Update basic profile details
+    // Update common profile details
     public boolean updateProfile(
             int userId,
             String name,
@@ -186,20 +193,10 @@ public class UserService {
 
         User user = getUserById(userId);
 
-        if (user == null) {
+        if (user == null ||
+            ValidationUtil.isEmpty(name) ||
+            !ValidationUtil.isValidPhone(phone)) {
             return false;
-        }
-
-        if (ValidationUtil.isEmpty(name)) {
-            throw new IllegalArgumentException(
-                "Name cannot be empty."
-            );
-        }
-
-        if (!ValidationUtil.isValidPhone(phone)) {
-            throw new IllegalArgumentException(
-                "Invalid phone number."
-            );
         }
 
         user.setName(name.trim());
