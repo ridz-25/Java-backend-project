@@ -13,6 +13,7 @@ import src.model.Buyer;
 import src.model.User;
 import src.model.Gig;
 import src.util.ValidationUtil;
+import src.dto.RatingSummaryDTO;
 
 public class ReviewService {
 
@@ -200,6 +201,65 @@ public class ReviewService {
         }
 
         return null;
+    }
+
+    // Get Rating Summary using DTO
+    public RatingSummaryDTO getRatingSummaryByGig(int gigId) {
+
+        int totalReviews = 0;
+        int totalRating = 0;
+
+        int fiveStarCount = 0;
+        int fourStarCount = 0;
+        int threeStarCount = 0;
+        int twoStarCount = 0;
+        int oneStarCount = 0;
+
+        for (Review review : reviews) {
+
+            if (review.getGigId() == gigId) {
+
+                totalReviews++;
+                totalRating += review.getRating();
+
+                switch (review.getRating()) {
+
+                    case 5:
+                        fiveStarCount++;
+                        break;
+
+                    case 4:
+                        fourStarCount++;
+                        break;
+
+                    case 3:
+                        threeStarCount++;
+                        break;
+
+                    case 2:
+                        twoStarCount++;
+                        break;
+
+                    case 1:
+                        oneStarCount++;
+                        break;
+                }
+            }
+        }
+
+        double averageRating = totalReviews == 0
+            ? 0.0
+            : (double) totalRating / totalReviews;
+
+        return new RatingSummaryDTO(
+            averageRating,
+            totalReviews,
+            fiveStarCount,
+            fourStarCount,
+            threeStarCount,
+            twoStarCount,
+            oneStarCount
+        );  
     }
 
     // Automatically calculate average rating
