@@ -1,0 +1,6 @@
+# Local service test classes
+/src/CategoryServiceTest.java
+/src/GigServiceTest.java
+/src/OrderServiceTest.java
+/src/ReviewServiceTest.java
+/src/UserServiceTest.java
