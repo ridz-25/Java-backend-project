@@ -1,0 +1,13 @@
+# Local service test classes
+/src/CategoryServiceTest.java
+/src/GigServiceTest.java
+/src/OrderServiceTest.java
+/src/ReviewServiceTest.java
+/src/UserServiceTest.java
+/src/SellerMetricsServiceTest.java
+/src/NotificationServiceTest.java
+/src/PaymentServiceTest.java
+/src/AdminServiceTest.java
+/src/ProjectServiceTest.java
+/src/ProposalServiceTest.java
+/src/AssignmentServiceTest.java
