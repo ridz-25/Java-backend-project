@@ -25,7 +25,7 @@ public BuyerMenu(GigService gigService,
         int choice;
 
         do {
-            System.out.println("\n======= BUYER DASHBOARD =======");
+            System.out.println("\n===== BUYER DASHBOARD =====");
             System.out.println("1. View All Gigs");
             System.out.println("2. Search Gigs");
             System.out.println("3. View My Orders");
