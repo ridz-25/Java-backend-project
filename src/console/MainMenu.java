@@ -51,7 +51,7 @@ case 1:
     System.out.println("\n1. Register as Buyer");
     System.out.println("2. Register as Seller");
 
-    int role = InputHelper.getInt("Choose a number for your role: ");
+    int role = InputHelper.getInt("Choose your role: ");
 
     try {
 

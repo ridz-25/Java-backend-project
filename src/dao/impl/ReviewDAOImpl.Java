@@ -1,8 +1,8 @@
-package dao.impl;
+package src.dao.impl;
 
-import dao.ReviewDAO;
-import model.Review;
-import util.DBConnection;
+import src.dao.ReviewDAO;
+import src.model.Review;
+import src.util.DBConnection;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
