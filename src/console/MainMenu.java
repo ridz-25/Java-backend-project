@@ -34,7 +34,7 @@ OrderService orderService = new OrderService(userService, gigService);
             System.out.println("2. Login");
             System.out.println("3. Exit");
 
-            System.out.print("\nEnter your choice: ");
+            System.out.print("\nEnter a number for your choice: ");
 
             try {
                 choice = Integer.parseInt(sc.nextLine());
@@ -51,7 +51,7 @@ case 1:
     System.out.println("\n1. Register as Buyer");
     System.out.println("2. Register as Seller");
 
-    int role = InputHelper.getInt("Choose your role: ");
+    int role = InputHelper.getInt("Choose a number for your role: ");
 
     try {
 
